@@ -615,9 +615,8 @@ public class BreakTracking {
 			}
 			
 			if (!shallow) { // we add to the "end" of a circular list. 
-				if (--recentPtr < 0) {
+				if (--recentPtr < 0)
 					recentPtr += RECENT_MAX;
-				}
 				recent[recentPtr] = loc;
 			}
 			recentCheck = System.nanoTime() - recentCheck;

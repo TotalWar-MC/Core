@@ -61,17 +61,14 @@ public class GrowthMap {
 				remap.put(cumrate, e.getKey());
 			}
 		}
-		if (cumrate > 1.0) {
+		if (cumrate > 1.0)
 			random = random * cumrate; // "inflate"
-		}
-		if (random > cumrate) {
+		if (random > cumrate)
 			return null;
-		}
 		// Find the element that caps this chance, if any.
 		Double newkey = remap.ceilingKey(random);
-		if (newkey == null) {
+		if (newkey == null)
 			return null;
-		}
 		Material ret = remap.get(newkey);
 		if (ret != null) {
 			GrowthConfig gc = materialMap.get(ret);

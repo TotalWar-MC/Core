@@ -19,7 +19,7 @@ public class DropGrouper {
 		private Location location;
 		private int amount;
 
-		Drop(Location location) {
+		public Drop (Location location) {
 			this.location = location;
 			amount = 1;
 		}
@@ -50,9 +50,8 @@ public class DropGrouper {
 		if (drops.size() > 0) {
 			for (Material material: drops.keySet()) {
 				List<Drop> list = drops.get(material);
-				for (Drop drop: list) {
+				for (Drop drop : list)
 					world.dropItem(drop.location, new ItemStack(material, drop.amount));
-				}
 			}
 		}
 		drops = null; // calling more than once throws NPE by design
