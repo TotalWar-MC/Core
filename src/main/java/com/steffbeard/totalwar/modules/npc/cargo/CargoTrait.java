@@ -2,6 +2,7 @@ package com.steffbeard.totalwar.modules.npc.cargo;
 
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.trait.TraitName;
+
 /**
 * CargoTrait is a marker trait that needs to be added to all dtl traders that can interact with Movecraft crafts
 */

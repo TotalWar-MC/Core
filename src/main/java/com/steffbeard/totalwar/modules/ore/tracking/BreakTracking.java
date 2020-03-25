@@ -235,9 +235,8 @@ public class BreakTracking {
 	}
 
 	public void saveMap() {
-		if (!Config.isMapActive()) {
+		if (!Config.isMapActive())
 			HiddenOre.getPlugin().getLogger().info("Skipped Break Map save, disabled in config.");
-		}
 		
 		long s = System.currentTimeMillis();
 		HiddenOre.getPlugin().getLogger().info("Starting Break Map save");
