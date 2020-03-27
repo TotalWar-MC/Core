@@ -1,4 +1,4 @@
-package com.steffbeard.totalwar.modules.npc.utils;
+package com.steffbeard.totalwar.utils;
 
 import java.io.File;
 import java.io.IOException;

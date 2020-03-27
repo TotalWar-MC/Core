@@ -9,8 +9,8 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.util.Vector;
 
-import com.steffbeard.totalwar.crops.GrowthMap;
-import com.steffbeard.totalwar.crops.Main;
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.GrowthMap;
 
 public class Trees {
 	
@@ -45,12 +45,12 @@ public class Trees {
 				}
 
 			} else {			
-				Main.doLog(Level.FINER, "getTreeType jungle tall");
+				Core.doLog(Level.FINER, "getTreeType jungle tall");
 			}
 
 		} else if (type == TreeType.REDWOOD) {
 			if (canGrowLArge(block, type)) {
-				Main.doLog(Level.FINER, "getTreeType mega redwood");
+				Core.doLog(Level.FINER, "getTreeType mega redwood");
 				type = TreeType.MEGA_REDWOOD;
 				
 			} else if (isPartOfLargeTree(block, type)) {
@@ -60,7 +60,7 @@ public class Trees {
 
 		} else if (type == TreeType.DARK_OAK) {
 			if (!canGrowLArge(block, type)) {
-				Main.doLog(Level.FINER, "getTreeType darkoak not 2x2");
+				Core.doLog(Level.FINER, "getTreeType darkoak not 2x2");
 				return null;
 			}
 			
@@ -68,12 +68,12 @@ public class Trees {
 			if (block.getBiome() == Biome.SWAMPLAND || block.getBiome() == Biome.MUTATED_SWAMPLAND) {
 				// swamptree, only spawns naturally at worldgen
 				type = TreeType.SWAMP;
-				Main.doLog(Level.FINER, "getTreeType swamp");
+				Core.doLog(Level.FINER, "getTreeType swamp");
 			}
 
 		}
 		
-		Main.doLog(Level.FINER, "Trees.getTreeType(): " + type);
+		Core.doLog(Level.FINER, "Trees.getTreeType(): " + type);
 		
 		return type;
 	}
@@ -93,7 +93,7 @@ public class Trees {
 		}
 		
 		double rate = growthMap.get(altType).getRate(block);
-		Main.doLog(Level.FINER, "Trees.getChance() is " + rate + " for " + altType + " at " + block.getLocation());
+		Core.doLog(Level.FINER, "Trees.getChance() is " + rate + " for " + altType + " at " + block.getLocation());
 		
 		if (Math.random() < rate) {
 			return altType;

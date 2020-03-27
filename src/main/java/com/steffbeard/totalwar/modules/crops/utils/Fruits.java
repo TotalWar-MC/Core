@@ -8,7 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.Vector;
 
-import com.steffbeard.totalwar.crops.persist.BlockGrower;
+import com.steffbeard.totalwar.modules.crops.persist.BlockGrower;
 
 /**
  * Fruit related helper functions. This could be optimized: convert this

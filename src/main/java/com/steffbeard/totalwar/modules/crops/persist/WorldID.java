@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 
-import com.steffbeard.totalwar.crops.Main;
+import com.steffbeard.totalwar.Core;
 
 public class WorldID {
 	/**
@@ -38,7 +38,7 @@ public class WorldID {
 					&& !world.getName().equals("world_nether")
 					&& !world.getName().equals("world_the_end")) {
 				if (otherWorlds == null) {
-					Main.doLog(Level.WARNING, "There are worlds that don't have default names (world, world_nether, world_the_end), experimental feature");
+					Core.doLog(Level.WARNING, "There are worlds that don't have default names (world, world_nether, world_the_end), experimental feature");
 					otherWorlds = new HashMap<UUID, Integer>();
 				}
 				otherWorlds.put(world.getUID(), world.getUID().hashCode());
@@ -65,7 +65,7 @@ public class WorldID {
 					}
 				}
 			}
-			Main.doLog(Level.SEVERE, "Cannot get UUID for world with id: " + id);
+			Core.doLog(Level.SEVERE, "Cannot get UUID for world with id: " + id);
 			return null;
 		}
 	}
@@ -84,7 +84,7 @@ public class WorldID {
 		} else if (otherWorlds != null && otherWorlds.containsKey(id)) {
 			return otherWorlds.get(id);
 		} else {
-			Main.doLog(Level.SEVERE, "Cannot get world id for UUID: " + id);
+			Core.doLog(Level.SEVERE, "Cannot get world id for UUID: " + id);
 			return -1;
 		}
 	}

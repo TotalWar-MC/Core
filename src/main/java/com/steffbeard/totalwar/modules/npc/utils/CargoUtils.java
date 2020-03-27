@@ -16,6 +16,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * Utils for Cargo type NPCs
+ * 
+ * @author Steffbeard
+ */
 public class CargoUtils {
 	private static final Material[] INVENTORY_MATERIALS = new Material[] { 
 			Material.CHEST, 

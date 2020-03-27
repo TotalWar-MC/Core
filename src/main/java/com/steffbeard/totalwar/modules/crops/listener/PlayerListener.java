@@ -13,25 +13,25 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import com.steffbeard.totalwar.crops.GrowthConfig;
-import com.steffbeard.totalwar.crops.GrowthMap;
-import com.steffbeard.totalwar.crops.Main;
-import com.steffbeard.totalwar.crops.persist.Plant;
-import com.steffbeard.totalwar.crops.utils.Fruits;
-import com.steffbeard.totalwar.crops.utils.MaterialAliases;
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.GrowthConfig;
+import com.steffbeard.totalwar.modules.crops.GrowthMap;
+import com.steffbeard.totalwar.modules.crops.persist.Plant;
+import com.steffbeard.totalwar.modules.crops.utils.Fruits;
+import com.steffbeard.totalwar.modules.crops.utils.MaterialAliases;
 
 public class PlayerListener implements Listener {
 	
 	public static Logger LOG = Logger.getLogger("RealisticBiomes");
 	
-	private Main plugin;
+	private Core plugin;
 	
 	
 	
 	
 	private GrowthMap growthConfigs;
 	
-	public PlayerListener(Main plugin, GrowthMap growthConfigs) {
+	public PlayerListener(Core plugin, GrowthMap growthConfigs) {
 		this.plugin = plugin;
 		this.growthConfigs = growthConfigs;
 	}
@@ -62,11 +62,11 @@ public class PlayerListener implements Listener {
 			
 			growthConfig = MaterialAliases.getConfig(growthConfigs, event.getItem());
 			if (growthConfig == null) {
-				Main.doLog(Level.FINER, "No config found for \"" + event.getItem() + "\" : " + growthConfigs.keySet());
+				Core.doLog(Level.FINER, "No config found for \"" + event.getItem() + "\" : " + growthConfigs.keySet());
 				return;
 			}
 			
-			Main.doLog(Level.FINER, "LEFT CLICK: " + event.getItem() + ", " + growthConfig);
+			Core.doLog(Level.FINER, "LEFT CLICK: " + event.getItem() + ", " + growthConfig);
 			
 			if (event.getItem().getType() == Material.INK_SACK) {
 				// if dye assume cocoa, otherwise would have exited earlier when growthConfig was null
@@ -108,9 +108,9 @@ public class PlayerListener implements Listener {
 
 		if (plugin.persistConfig.enabled && growthConfig.isPersistent()) {
 			double rate = growthConfig.getRate(block);
-			Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): rate for " + materialName + " at block " + block + " is " + rate);
+			Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): rate for " + materialName + " at block " + block + " is " + rate);
 			rate = (1.0/(rate*(60.0*60.0/*seconds per hour*/)));
-			Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): rate adjusted to "  + rate);
+			Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): rate adjusted to "  + rate);
 			
 			if (plant == null) {
 				String amount = new DecimalFormat("#0.00").format(rate);
@@ -126,9 +126,9 @@ public class PlayerListener implements Listener {
 							block = Fruits.getFreeBlock(event.getClickedBlock(), null);
 							if (block != null) {
 								double fruitRate = growthConfig.getRate(block);
-								Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): fruit rate for block " + block + " is " + fruitRate);
+								Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): fruit rate for block " + block + " is " + fruitRate);
 								fruitRate = (1.0/(fruitRate*(60.0*60.0/*seconds per hour*/)));
-								Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): fruit rate adjusted to "  + fruitRate);
+								Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): fruit rate adjusted to "  + fruitRate);
 								
 								String amount = new DecimalFormat("#0.00").format(fruitRate);
 								String pAmount = new DecimalFormat("#0.00").format(fruitRate*(1.0-plant.getFruitGrowth()));
@@ -140,13 +140,13 @@ public class PlayerListener implements Listener {
 					
 				}
 				
-				Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): plant fruit is: " + plant.getFruitGrowth());
+				Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): plant fruit is: " + plant.getFruitGrowth());
 				String amount = new DecimalFormat("#0.00").format(rate);
 				event.getPlayer().sendMessage("§7[Realistic Biomes] \"" + materialName + "\": "+amount+" hours to maturity");
 
 			} else {
 				
-				Main.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): plant growth is: " + plant.getGrowth());
+				Core.doLog(Level.FINER, "PlayerListener.onPlayerInteractEvent(): plant growth is: " + plant.getGrowth());
 				String amount = new DecimalFormat("#0.00").format(rate);
 				String pAmount = new DecimalFormat("#0.00").format(rate*(1.0-plant.getGrowth()));
 				event.getPlayer().sendMessage("§7[Realistic Biomes] \"" + materialName + "\": "+pAmount+" of "+amount+" hours to maturity");

@@ -1,8 +1,6 @@
 package com.steffbeard.totalwar.modules.masslist;
 
 import com.github.games647.craftapi.UUIDAdapter;
-import com.mrpowergamerbr.temmiewebhook.DiscordMessage;
-import com.mrpowergamerbr.temmiewebhook.TemmieWebhook;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -193,7 +191,7 @@ public final class MassWhitelist extends JavaPlugin {
         }
 
         if (command.getName().equals("masswl")) {
-            TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
+//            TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
             int wlarraylength = 0; //Initiate variable for array size.
             if (sender instanceof Player) {
                 Player player = (Player) sender;
@@ -234,8 +232,8 @@ public final class MassWhitelist extends JavaPlugin {
                         Bukkit.getServer().reloadWhitelist();
                         player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "MassWhitelist" + ChatColor.RED + "]" + ChatColor.GREEN + " MassWhitelist process is now completed!");
                     }
-                DiscordMessage dm = new DiscordMessage("Total War Whitelist", "@everyone whitelist applications have been processed! If you were accepted, you should be able to connect to the server using IP `" + serverIP + "`. Ready to conquer?", logoURL);
-                playerNotify.sendMessage(dm);
+//                DiscordMessage dm = new DiscordMessage("Total War Whitelist", "@everyone whitelist applications have been processed! If you were accepted, you should be able to connect to the server using IP `" + serverIP + "`. Ready to conquer?", logoURL);
+//                playerNotify.sendMessage(dm);
 
                 } else {
                     player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "MassWhitelist" + ChatColor.RED + "] " + ChatColor.DARK_RED + "You don't have the permission to run this command!");
@@ -277,8 +275,8 @@ public final class MassWhitelist extends JavaPlugin {
                     Bukkit.getServer().reloadWhitelist();
                     System.out.println("MassWhitelist process is now completed!");
                 }
-            DiscordMessage dm = new DiscordMessage("Total War Whitelist", "@everyone whitelist applications have been processed! If you were accepted, you should be able to connect to the server using IP `" + serverIP + "`. Ready to conquer?", logoURL);
-            playerNotify.sendMessage(dm);
+//            DiscordMessage dm = new DiscordMessage("Total War Whitelist", "@everyone whitelist applications have been processed! If you were accepted, you should be able to connect to the server using IP `" + serverIP + "`. Ready to conquer?", logoURL);
+//            playerNotify.sendMessage(dm);
             }
 
         }

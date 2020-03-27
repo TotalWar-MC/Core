@@ -14,13 +14,11 @@ import org.bukkit.block.Block;
 
 import com.avaje.ebeaninternal.server.lib.sql.DataSourceException;
 
-import com.steffbeard.totalwar.crops.DropGrouper;
-import com.steffbeard.totalwar.crops.GrowthConfig;
-import com.steffbeard.totalwar.crops.Main;
-import com.steffbeard.totalwar.crops.utils.MaterialAliases;
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.DropGrouper;
 
 public class PlantChunk {
-	private final Main plugin;
+	private final Core plugin;
 	private final ChunkCoords coords;
 	// index of this chunk in the database
 	private long index;
@@ -30,7 +28,7 @@ public class PlantChunk {
 	boolean loaded;
 	boolean inDatabase;
 
-	public PlantChunk(Main plugin, long index, ChunkCoords coords) {
+	public PlantChunk(Core plugin, long index, ChunkCoords coords) {
 		this.plugin = plugin;
 		plants = new HashMap<Coords, Plant>();
 		this.index = index;
@@ -38,7 +36,7 @@ public class PlantChunk {
 
 		this.loaded = false;
 		this.inDatabase = false;
-		Main.doLog(Level.FINER,"PlantChunk() called with coords: " + coords);
+		Core.doLog(Level.FINER,"PlantChunk() called with coords: " + coords);
 	}
 
 	/**
@@ -80,7 +78,7 @@ public class PlantChunk {
 	public synchronized int getPlantCount() {
 
 		if (plants == null) {
-			Main.LOG
+			Core.LOG
 					.severe("PLANTS HASHMAP IS NULL, THIS SHOULD NOT HAPPEN");
 			return 0;
 		}
@@ -93,16 +91,16 @@ public class PlantChunk {
 		if (!loaded)
 			return;
 
-		Main.doLog(Level.FINER,"plantchunk.remove(): called with coords: " + coords);
+		Core.doLog(Level.FINER,"plantchunk.remove(): called with coords: " + coords);
 		
 		plants.remove(coords);
 	}
 
 	public synchronized void addPlant(Coords coords, Plant plant) {
 
-		Main.doLog(Level.FINER,"plantchunk.add(): called with coords: "
+		Core.doLog(Level.FINER,"plantchunk.add(): called with coords: "
 				+ coords + " and plant " + plant);
-		Main.doLog(Level.FINER, "plantchunk.add(): is loaded? " + loaded);
+		Core.doLog(Level.FINER, "plantchunk.add(): is loaded? " + loaded);
 		if (!loaded) {
 
 			load();
@@ -115,7 +113,7 @@ public class PlantChunk {
 
 	public synchronized Plant get(Coords coords) {
 		if (!loaded) {
-			Main.doLog(Level.FINER,"Plantchunk.get(): returning null cause not loaded");
+			Core.doLog(Level.FINER,"Plantchunk.get(): returning null cause not loaded");
 			return null;
 		}
 		return plants.get(coords);
@@ -131,14 +129,14 @@ public class PlantChunk {
 			return innerLoad();
 		} catch (DataSourceException dse) {
 			// assume DB has gone away, reconnect and try one more time.
-			Main.LOG.log(Level.WARNING, "Looks like DB has gone away: ", dse);			
+			Core.LOG.log(Level.WARNING, "Looks like DB has gone away: ", dse);			
 		}
 		
 		// if we are here, had failure -- one retry, then bail
 		try {
 			return innerLoad();
 		} catch(DataSourceException dse) {
-			Main.LOG.log(Level.WARNING, "DB really has gone away: ", dse);
+			Core.LOG.log(Level.WARNING, "DB really has gone away: ", dse);
 			throw dse;
 		}
 	}
@@ -153,7 +151,7 @@ public class PlantChunk {
 		// if the data is being loaded, it is known that this chunk is in the
 		// database
 
-		Main.doLog(Level.FINER, 
+		Core.doLog(Level.FINER, 
 				"Plantchunk.load() called with coords: " + coords);
 
 		if (loaded) {
@@ -169,7 +167,7 @@ public class PlantChunk {
 				PreparedStatement loadPlantsStmt = connection.prepareStatement(Database.loadPlantsStmt);){
 
 			loadPlantsStmt.setLong(1, index);
-			Main.doLog(Level.FINER, "PlantChunk.load() executing sql query: " + Database.loadPlantsStmt);
+			Core.doLog(Level.FINER, "PlantChunk.load() executing sql query: " + Database.loadPlantsStmt);
 			
 			try (ResultSet rs = loadPlantsStmt.executeQuery()) {
 				while (rs.next()) {
@@ -181,13 +179,13 @@ public class PlantChunk {
 					float growth = rs.getFloat(6);
 					float fruitGrowth = rs.getFloat(7);
 	
-					Main.doLog(Level.FINEST, String
+					Core.doLog(Level.FINEST, String
 									.format("PlantChunk.load(): got result: w:%s x:%s y:%s z:%s date:%s growth:%s",
 											w, x, y, z, date, growth));
 	
 					// if the plant does not correspond to an actual crop, don't load it
 					if (MaterialAliases.getConfig(plugin.materialGrowth, world.getBlockAt(x, y, z)) == null) {
-						Main.doLog(Level.FINER, "Plantchunk.load(): plant we got from db doesn't correspond to an actual crop, not loading");
+						Core.doLog(Level.FINER, "Plantchunk.load(): plant we got from db doesn't correspond to an actual crop, not loading");
 						continue;
 					}
 	
@@ -202,7 +200,7 @@ public class PlantChunk {
 					// if the plant isn't finished growing, add it to the plants
 					if (!plant.isFullyGrown()) {
 						plants.put(new Coords(w, x, y, z), plant);
-						Main.doLog(Level.FINER, "PlantChunk.load(): plant not finished growing, adding to plants list");
+						Core.doLog(Level.FINER, "PlantChunk.load(): plant not finished growing, adding to plants list");
 					}
 				}
 			}
@@ -227,14 +225,14 @@ public class PlantChunk {
 			return;
 		} catch (DataSourceException dse) {
 			// assume DB has gone away, reconnect and try one more time.
-			Main.LOG.log(Level.WARNING, "Looks like DB has gone away: ", dse);			
+			Core.LOG.log(Level.WARNING, "Looks like DB has gone away: ", dse);			
 		}
 		
 		// if we are here, had failure -- do one retry
 		try {
 			innerUnload();
 		} catch(DataSourceException dse) {
-			Main.LOG.log(Level.WARNING, "DB really has gone away: ", dse);
+			Core.LOG.log(Level.WARNING, "DB really has gone away: ", dse);
 			throw dse;
 		}
 	}
@@ -245,20 +243,20 @@ public class PlantChunk {
 	 */
 	private void innerUnload() {
 
-		Main.doLog(Level.FINEST,"PlantChunk.innerUnload(): called with coords "
+		Core.doLog(Level.FINEST,"PlantChunk.innerUnload(): called with coords "
 				+ coords + "plantchunk object: " + this);
 		
 		if (!loaded) {
-			Main.doLog(Level.FINEST, "Plantchunk.innerUnload(): not loaded so returning");
+			Core.doLog(Level.FINEST, "Plantchunk.innerUnload(): not loaded so returning");
 			return;
 		}
 
 		try {
 			// if this chunk was not in the database, then add it to the
 			// database
-			Main.doLog(Level.FINEST,"PlantChunk.innerUnload(): is inDatabase?: " + inDatabase);
+			Core.doLog(Level.FINEST,"PlantChunk.innerUnload(): is inDatabase?: " + inDatabase);
 			if (!inDatabase) {
-				Main.doLog(Level.FINEST, "  not in database, adding new chunk");
+				Core.doLog(Level.FINEST, "  not in database, adding new chunk");
 				try (Connection connection = plugin.getPlantManager().getDb().getConnection();
 						PreparedStatement addChunkStmt = connection.prepareStatement(Database.addChunkStmt, Statement.RETURN_GENERATED_KEYS);) {
 					addChunkStmt.setInt(1, coords.w);
@@ -270,7 +268,7 @@ public class PlantChunk {
 						// we get the index, and throw an exceptionif we don't
 						if (rs.next()) {
 							index = rs.getLong(1);
-							Main.doLog(Level.FINEST, "plantchunk.innerUnload(): got new autoincrement index, it is now "
+							Core.doLog(Level.FINEST, "plantchunk.innerUnload(): got new autoincrement index, it is now "
 											+ index);
 						} else {
 							throw new DataSourceException(
@@ -311,7 +309,7 @@ public class PlantChunk {
 						boolean needToExec = false;
 						
 						try (PreparedStatement addPlantStmt = connection.prepareStatement(Database.addPlantStmt);) {
-							Main.doLog(Level.FINEST, "PlantChunk.unload(): Unloading plantchunk with index: " + this.index);
+							Core.doLog(Level.FINEST, "PlantChunk.unload(): Unloading plantchunk with index: " + this.index);
 							for (Coords coords : plants.keySet()) {
 								if (!needToExec) {
 									needToExec = true;
@@ -362,7 +360,7 @@ public class PlantChunk {
 		// only set loaded to false and reset the plants HashMap
 		// only if we are not caching the entire database
 		if (!this.plugin.persistConfig.cacheEntireDatabase) {
-			Main.doLog(Level.FINER, String.format("PlantChunk.unload(): clearing hashmap for chunk at %s", coords));
+			Core.doLog(Level.FINER, String.format("PlantChunk.unload(): clearing hashmap for chunk at %s", coords));
 			plants = new HashMap<Coords, Plant>();
 			loaded = false;
 		} 

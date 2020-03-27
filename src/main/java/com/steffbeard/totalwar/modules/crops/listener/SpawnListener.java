@@ -13,9 +13,7 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.steffbeard.totalwar.crops.GrowthConfig;
-import com.steffbeard.totalwar.crops.GrowthMap;
-import com.steffbeard.totalwar.crops.Main;
+import com.steffbeard.totalwar.modules.crops.GrowthMap;
 
 /**
  * Event listeners for animal spawn related events. Whenever animals breed or a fish is caught, the species is checked against

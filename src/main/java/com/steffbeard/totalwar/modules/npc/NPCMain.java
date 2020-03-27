@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.steffbeard.totalwar.configs.NpcConfig;
 import com.steffbeard.totalwar.modules.crops.Main;
 import com.steffbeard.totalwar.modules.npc.cargo.CargoTrait;
 import com.steffbeard.totalwar.modules.npc.cargo.LoadTask;
@@ -52,7 +53,7 @@ public class NPCMain extends JavaPlugin implements Listener {
 	private static int delay;// ticks
 	private static Material SIGN_POST = Material.getMaterial("SIGN_POST");
 	private static Main dtlTradersPlugin;
-	public Config config;
+	public NpcConfig config;
 	private CraftManager craftManager;
 	private boolean cardinalDistance;
 	private static boolean debug;
@@ -63,18 +64,6 @@ public class NPCMain extends JavaPlugin implements Listener {
 		this.getServer().getPluginManager().registerEvents(this, this);
 		playersInQue = new ArrayList<Player>();
 		instance = this;
-
-		// ************************
-		// * Configs *
-		// ************************
-		final File dataFolder = this.getDataFolder();
-		this.config = new Config(dataFolder);
-		try {
-			this.config.load();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		this.saveDefaultConfig();
 
 		// ************************
 		// * Load Movecraft *

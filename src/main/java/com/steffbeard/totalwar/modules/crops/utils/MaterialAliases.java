@@ -14,8 +14,9 @@ import org.bukkit.material.Dye;
 import org.bukkit.material.MaterialData;
 import org.bukkit.material.SpawnEgg;
 
-import com.steffbeard.totalwar.crops.GrowthConfig;
-import com.steffbeard.totalwar.crops.GrowthMap;
+import com.steffbeard.totalwar.modules.crops.GrowthConfig;
+import com.steffbeard.totalwar.modules.crops.GrowthMap;
+
 
 public class MaterialAliases {
 	// map Material that a user uses to hit the ground to a Material, TreeType,

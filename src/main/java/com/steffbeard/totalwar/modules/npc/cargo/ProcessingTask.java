@@ -9,13 +9,11 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import com.steffbeard.totalwar.npc.Config;
-
 import nl.thewgbbroz.dtltraders.guis.tradegui.items.TradableGUIItem;
 
 public class ProcessingTask extends BukkitRunnable implements Listener {
 	
-	public Config config;
+	public NpcConfig config;
 	
     private static final int DELAY_BETWEEN_DISPLAY = 1;
     private int remainingTime, remainingChests;

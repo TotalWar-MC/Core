@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-import com.steffbeard.totalwar.crops.PersistConfig;
-import com.steffbeard.totalwar.crops.Main;
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.PersistConfig;
 import com.zaxxer.hikari.HikariConfig;
 
 /**
@@ -40,14 +40,14 @@ public class Database {
 			}
 			this.datasource = new HikariDataSource(config);
 
-			Main.doLog(Level.FINER, "creating chunk table (if necessary) with prepared statement:" + Database.makeTableChunk);
+			Core.doLog(Level.FINER, "creating chunk table (if necessary) with prepared statement:" + Database.makeTableChunk);
 
 			try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(Database.makeTableChunk);) {
 				statement.execute();
 				statement.close();
 			} catch (SQLException se) {
-				Main.doLog(Level.SEVERE, "Unable to initialize chunk table in Database!", se);
+				Core.doLog(Level.SEVERE, "Unable to initialize chunk table in Database!", se);
 				this.datasource = null;
 				return;
 			}
@@ -56,7 +56,7 @@ public class Database {
 				PreparedStatement statement = connection.prepareStatement(Database.makeTablePlant);) {
 				statement.execute();
 			} catch (SQLException se) {
-				Main.doLog(Level.SEVERE, "Unable to initialize plant table in Database!", se);
+				Core.doLog(Level.SEVERE, "Unable to initialize plant table in Database!", se);
 				this.datasource = null;
 				return;
 			}
@@ -68,12 +68,12 @@ public class Database {
 				PreparedStatement upgradeTablePlant = connection.prepareStatement(Database.migration0001);){
 				upgradeTablePlant.execute();
 			} catch (SQLException e) {
-				Main.LOG.info("Could not update table - ignore if already updated. Error code: " + e.getErrorCode() + ", error message: " + e.getMessage());
+				Core.LOG.info("Could not update table - ignore if already updated. Error code: " + e.getErrorCode() + ", error message: " + e.getMessage());
 			}
 
 		} else {
 			this.datasource = null;
-			Main.doLog(Level.SEVERE, "Database not configured and is unavaiable");
+			Core.doLog(Level.SEVERE, "Database not configured and is unavaiable");
 		}
 	}
 	

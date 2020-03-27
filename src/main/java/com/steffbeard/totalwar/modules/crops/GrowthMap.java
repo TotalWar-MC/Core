@@ -11,11 +11,14 @@ import java.util.TreeMap;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
 import com.steffbeard.totalwar.modules.crops.GrowthConfig.Type;
 import com.steffbeard.totalwar.modules.crops.utils.MaterialAliases;
+
+import net.minecraft.server.v1_12_R1.EnchantmentManager;
 
 /**
  * Would probably be best to have box type as key, with material + data or entity
@@ -85,8 +88,8 @@ public class GrowthMap {
 				}
 			}
 			if (gc.getApplyRandomEnchantment()) {
-				ItemStack nmsis = CraftItemStack.asNMSCopy(is);
-				ItemStack nmsis2 = EnchantmentManager.a(
+				net.minecraft.server.v1_12_R1.ItemStack nmsis = CraftItemStack.asNMSCopy(is);
+				net.minecraft.server.v1_12_R1.ItemStack nmsis2 = EnchantmentManager.a(
 						new Random(), nmsis, 30, gc.getAllowTreasureEnchantments());
 				is = CraftItemStack.asBukkitCopy(nmsis2);
 			}

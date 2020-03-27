@@ -16,16 +16,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.steffbeard.totalwar.crops.GrowthConfig.Type;
-import com.steffbeard.totalwar.crops.listener.GrowListener;
-import com.steffbeard.totalwar.crops.listener.PlayerListener;
-import com.steffbeard.totalwar.crops.listener.SpawnListener;
-import com.steffbeard.totalwar.crops.persist.BlockGrower;
-import com.steffbeard.totalwar.crops.persist.ChunkCoords;
-import com.steffbeard.totalwar.crops.persist.Plant;
-import com.steffbeard.totalwar.crops.persist.PlantManager;
-import com.steffbeard.totalwar.crops.utils.Fruits;
-import com.steffbeard.totalwar.crops.utils.MaterialAliases;
+import com.steffbeard.totalwar.modules.crops.persist.BlockGrower;
+import com.steffbeard.totalwar.modules.crops.persist.PlantManager;
 
 public class Main extends JavaPlugin {
 

@@ -25,13 +25,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.avaje.ebeaninternal.server.lib.sql.DataSourceException;
-import com.steffbeard.totalwar.crops.DropGrouper;
-import com.steffbeard.totalwar.crops.PersistConfig;
-import com.steffbeard.totalwar.crops.Main;
-import com.steffbeard.totalwar.crops.utils.MaterialAliases;
+
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.DropGrouper;
+import com.steffbeard.totalwar.modules.crops.PersistConfig;
+import com.steffbeard.totalwar.modules.crops.utils.MaterialAliases;
 
 public class PlantManager {
-	private final Main plugin;
+	private final Core plugin;
 	private final PersistConfig config;
 	
 	// database connection
@@ -95,7 +96,7 @@ public class PlantManager {
 		
 		// load all chunks
 		
-		Main.LOG.info("loading PlantChunks");
+		Core.LOG.info("loading PlantChunks");
 		long startTime = System.nanoTime()/1000000/*ns/ms*/;
 
 		try (Connection connection = db.getConnection();
@@ -110,7 +111,7 @@ public class PlantManager {
 				PlantChunk pChunk = new PlantChunk(plugin, id, new ChunkCoords(w, x, z));
 				pChunk.loaded = false;
 				pChunk.inDatabase = true;
-				Main.doLog(Level.FINER, "\tLoaded plantchunk " + pChunk + " at coords " + new Coords(w,x,0,z));
+				Core.doLog(Level.FINER, "\tLoaded plantchunk " + pChunk + " at coords " + new Coords(w,x,0,z));
 				chunks.addChunk(pChunk);
 			}
 			
@@ -119,7 +120,7 @@ public class PlantManager {
 		}
 		long endTime = System.nanoTime()/1000000/*ns/ms*/;
 
-		Main.LOG.info("Finished loading all PlantChunks - time taken: " +(endTime-startTime) + "ms");
+		Core.LOG.info("Finished loading all PlantChunks - time taken: " +(endTime-startTime) + "ms");
 
 		// create unload batch
 		chunksToUnload = new LinkedBlockingQueue<ChunkCoords>();
@@ -155,7 +156,7 @@ public class PlantManager {
 		// We need to be careful not to run out of memory...
 		
 		try {
-			Main.LOG.info("Attempting to load all of the plants for all the plant chunks!");
+			Core.LOG.info("Attempting to load all of the plants for all the plant chunks!");
 
 			long startTimeOne = System.nanoTime()/1000000/*ns/ms*/;
 			
@@ -166,7 +167,7 @@ public class PlantManager {
 			
 			long endTimeOne = System.nanoTime()/1000000/*ns/ms*/;
 			
-			Main.LOG.info("Finished loading all Plants inside the PlantChunks - time taken: " +(endTimeOne-startTimeOne) + "ms");
+			Core.LOG.info("Finished loading all Plants inside the PlantChunks - time taken: " +(endTimeOne-startTimeOne) + "ms");
 
 			
 		} catch (OutOfMemoryError oome) {
@@ -176,7 +177,7 @@ public class PlantManager {
 			this.chunks = null;
 			System.gc();
 			
-			Main.LOG.severe("OUT OF MEMORY ERROR WHEN LOADING ALL "
+			Core.LOG.severe("OUT OF MEMORY ERROR WHEN LOADING ALL "
 					+ "THE PLANTS FOR ALL THE PLANT CHUNKS SHUTTING DOWN BUKKIT! ERROR: " + oome);
 			
 			// R.I.P in peaces bukkit
@@ -254,14 +255,14 @@ public class PlantManager {
 			
 			if (whichEvent == ChunkDBEvent.LoadEvent) {
 				if (timeTakenInMs >= config.productionLogLoadMintime) {
-					Main.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
+					Core.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
 				}
 				return;
 				
 			} else {
 				// UnloadEvent
 				if (timeTakenInMs >= config.productionLogUnloadMintime) {
-					Main.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
+					Core.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
 				}
 				return;
 			}
@@ -269,7 +270,7 @@ public class PlantManager {
 		
 		// here, productionLogDb is set to false, check to see if logDb is true
 		if (config.logDB) {
-			Main.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
+			Core.LOG.info("[" + whichEvent.toString() + "] "+ message + " - time taken: " +  timeTakenInMs + "ms");
 			return;
 		}
 		
@@ -387,7 +388,7 @@ public class PlantManager {
 		}
 		// if the plant chunk is already loaded, then there is no need to load
 		if (pChunk.isLoaded()) {
-			Main.doLog(Level.FINEST, "PlantManager.loadChunk(): plantChunk already loaded, returning true");
+			Core.doLog(Level.FINEST, "PlantManager.loadChunk(): plantChunk already loaded, returning true");
 			return pChunk;
 		}
 		
@@ -398,7 +399,7 @@ public class PlantManager {
 		Chunk c = world.getChunkAt(pChunk.getChunkCoord().x, pChunk.getChunkCoord().z);
 		
 		if (!world.isChunkLoaded(c)) {
-			Main.doLog(Level.FINEST, "PlantManager.loadChunk(): minecraft chunk was unloaded again... returning false");
+			Core.doLog(Level.FINEST, "PlantManager.loadChunk(): minecraft chunk was unloaded again... returning false");
 			return null;
 		}
 		
@@ -406,7 +407,7 @@ public class PlantManager {
 		long start = System.nanoTime()/1000000/*ns/ms*/;
 		boolean loaded = pChunk.load();
 		long end = System.nanoTime()/1000000/*ns/ms*/;
-		Main.doLog(Level.FINER, "PlantManager.loadChunk():Had to load chunk, pchunk.load() returned " + loaded);
+		Core.doLog(Level.FINER, "PlantManager.loadChunk():Had to load chunk, pchunk.load() returned " + loaded);
 		
 		logLoadOrUnloadEvent("Loaded chunk ["+coords.x+","+coords.z+"]", this.config, ChunkDBEvent.LoadEvent, end-start);
 		
@@ -431,7 +432,7 @@ public class PlantManager {
 		Coords blockCoords = new Coords(block);
 		
 		// TESTING
-		Main.doLog(Level.FINER, "PlantManager.add() called at coords " + blockCoords + " and plant " + plant);
+		Core.doLog(Level.FINER, "PlantManager.add() called at coords " + blockCoords + " and plant " + plant);
 
 		
 		// Only query the map a single time, optimize !!!
@@ -441,10 +442,10 @@ public class PlantManager {
 			pChunk = new PlantChunk(plugin, -1/*dummy index until assigned when added*/, chunkCoords);
 			chunks.addChunk(pChunk); 
 			pChunk.loaded = true; // its loaded because its a brand new plant chunk. 
-			Main.doLog(Level.FINER, "PlantManager.add() creating new plantchunk: " + pChunk + "at coords " + chunkCoords);
+			Core.doLog(Level.FINER, "PlantManager.add() creating new plantchunk: " + pChunk + "at coords " + chunkCoords);
 		}
 		else {
-			Main.doLog(Level.FINER, "PlantManager.add(): loading existing plant chunk");
+			Core.doLog(Level.FINER, "PlantManager.add(): loading existing plant chunk");
 		}
 		
 		// add the plant
@@ -458,7 +459,7 @@ public class PlantManager {
 		// exit with failure		
 		PlantChunk pChunk = chunks.get(chunkCoord);
 		if (pChunk == null) {
-			Main.doLog(Level.FINER, "PlantManager.get() returning null due to not containing the Plantchunk object in 'chunks'");
+			Core.doLog(Level.FINER, "PlantManager.get() returning null due to not containing the Plantchunk object in 'chunks'");
 			return null;
 		}
 		
@@ -495,7 +496,7 @@ public class PlantManager {
 			return;
 		}
 
-		Main.doLog(Level.FINER, "PlantManager.growChunk() group: " + pChunk.getPlantCoords().size());
+		Core.doLog(Level.FINER, "PlantManager.growChunk() group: " + pChunk.getPlantCoords().size());
 		DropGrouper dropGrouper = new DropGrouper(chunk.getWorld());
 		
 		// We can assume the chunk will be loaded at this point
@@ -531,7 +532,7 @@ public class PlantManager {
 		// make sure the chunk is loaded
 		loadChunk(chunkCoords);
 		
-		Main.doLog(Level.FINER, "PlantManager.removePlant(): removing plant: " + block.getLocation());
+		Core.doLog(Level.FINER, "PlantManager.removePlant(): removing plant: " + block.getLocation());
 		
 		pChunk.remove(new Coords(block));		
 	}

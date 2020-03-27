@@ -5,15 +5,13 @@ import nl.thewgbbroz.dtltraders.guis.tradegui.items.TradableGUIItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 
-import com.steffbeard.totalwar.npc.Config;
-import com.steffbeard.totalwar.npc.NPCMain;
-import com.steffbeard.totalwar.npc.utils.CargoUtils;
+import com.steffbeard.totalwar.modules.npc.utils.CargoUtils;
 
 import java.util.List;
 
 public class UnloadTask extends CargoTask {
    
-	public Config config;
+	public NpcConfig config;
 	
 	public UnloadTask(Craft craft, TradableGUIItem item){
         super(craft,item);

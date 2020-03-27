@@ -26,14 +26,12 @@ import org.bukkit.material.Dispenser;
 import org.bukkit.material.Dye;
 import org.bukkit.material.MaterialData;
 
-import com.steffbeard.totalwar.crops.GrowthConfig;
-import com.steffbeard.totalwar.crops.Main;
-import com.steffbeard.totalwar.crops.persist.ChunkCoords;
-import com.steffbeard.totalwar.crops.persist.Plant;
-import com.steffbeard.totalwar.crops.persist.WorldID;
-import com.steffbeard.totalwar.crops.utils.Fruits;
-import com.steffbeard.totalwar.crops.utils.MaterialAliases;
-import com.steffbeard.totalwar.crops.utils.Trees;
+import com.steffbeard.totalwar.Core;
+import com.steffbeard.totalwar.modules.crops.GrowthConfig;
+import com.steffbeard.totalwar.modules.crops.persist.WorldID;
+import com.steffbeard.totalwar.modules.crops.utils.Fruits;
+import com.steffbeard.totalwar.modules.crops.utils.MaterialAliases;
+import com.steffbeard.totalwar.modules.crops.utils.Trees;
 
 /**
  * Event listener for all plant growth related events. Whenever a crop, plant block, or sapling attempts to grow, its type
@@ -44,9 +42,9 @@ import com.steffbeard.totalwar.crops.utils.Trees;
  */
 public class GrowListener implements Listener {
 	
-	private final Main plugin;
+	private final Core plugin;
 	
-	public GrowListener(Main plugin) {
+	public GrowListener(Core plugin) {
 		super();
 		
 		this.plugin = plugin;

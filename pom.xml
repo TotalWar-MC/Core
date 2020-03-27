@@ -9,12 +9,21 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
+				<filters>
+					<filter>
+						<artifact>com.zaxxer:HikariCP</artifact>
+						<includes>
+							<include>**</include>
+						</includes>
+					</filter>
+				</filters>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
@@ -28,7 +37,23 @@
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
+        <!-- CodeMc -->
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <name>JitPack</name>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
 	</repositories>
+	
 	<dependencies>
 		<dependency>
    			<groupId>com.eclipsesource.minimal-json</groupId>
@@ -63,7 +88,7 @@
 			<artifactId>Movecraft</artifactId>
 			<version>3.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/movecraft.jar</systemPath>
+            <systemPath>${project.basedir}/libs/Movecraft.jar</systemPath>
 		</dependency>
         <!--DTL Core-->
         <!--<dependency>
@@ -105,18 +130,13 @@
             <artifactId>craftapi</artifactId>
             <version>0.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.MrPowerGamerBR</groupId>
-            <artifactId>TemmieWebhook</artifactId>
-            <version>master-59de40c3b6-1</version>
-        </dependency>
         <!--Bukkit API -->
-	<dependency>
-		<groupId>org.bukkit</groupId>
-		<artifactId>bukkit</artifactId>
-		<version>1.12.2-R0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-	</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.12.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
         <!-- HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -136,5 +156,74 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
         </dependency>
+        <dependency>
+            <groupId>com.jagrosh</groupId>
+            <artifactId>jda-utilities-commons</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.bmartel</groupId>
+            <artifactId>jspeedtest</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.moandjiezana.toml</groupId>
+            <artifactId>toml4j</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sedmelluq</groupId>
+            <artifactId>lavaplayer</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/at.mukprojects/giphy4j -->
+        <dependency>
+            <groupId>at.mukprojects</groupId>
+            <artifactId>giphy4j</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rosaloves</groupId>
+            <artifactId>bitlyj</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.8-dmr</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.avaje/ebean -->
+		<dependency>
+    		<groupId>org.avaje</groupId>
+    		<artifactId>ebean</artifactId>
+    		<version>2.7.3</version>
+		</dependency>
 	</dependencies>
 </project>
