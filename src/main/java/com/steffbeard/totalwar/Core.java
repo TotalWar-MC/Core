@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import com.steffbeard.totalwar.modules.crops.GrowthMap;
 import com.steffbeard.totalwar.modules.crops.Main;
@@ -17,6 +19,11 @@ import com.steffbeard.totalwar.modules.crops.PersistConfig;
 import com.steffbeard.totalwar.modules.crops.persist.BlockGrower;
 import com.steffbeard.totalwar.modules.crops.persist.PlantManager;
 import com.steffbeard.totalwar.modules.npc.cargo.CargoTrait;
+import com.steffbeard.totalwar.modules.ore.config.Config;
+import com.steffbeard.totalwar.modules.ore.listeners.BlockBreakListener;
+import com.steffbeard.totalwar.modules.ore.listeners.ExploitListener;
+import com.steffbeard.totalwar.modules.ore.listeners.WorldGenerationListener;
+import com.steffbeard.totalwar.modules.ore.tracking.BreakTracking;
 
 import net.countercraft.movecraft.craft.CraftManager;
 
@@ -32,7 +39,6 @@ public class Core extends JavaPlugin {
 
 	// Main
 	public static Core plugin;
-	public  config;
 	public static Logger LOG = null;
 	public static Level minLogLevel = Level.INFO;
 	private String version = "2.0.0";
@@ -50,6 +56,14 @@ public class Core extends JavaPlugin {
 	public BlockGrower blockGrower;
 	public PersistConfig persistConfig;
 	private PlantManager plantManager;
+	
+	// Ores
+	private static BreakTracking tracking;
+	private BukkitTask trackingSave;
+	private BukkitTask trackingMapSave;
+	private static BlockBreakListener breakHandler;
+	private static ExploitListener exploitHandler;
+	private static List<WorldGenerationListener> worldGen;
 	
 	/**
 	 * Instance
@@ -88,7 +102,18 @@ public class Core extends JavaPlugin {
 		if (net.citizensnpcs.api.CitizensAPI.getTraitFactory().getTrait(CargoTrait.class) == null)
 			net.citizensnpcs.api.CitizensAPI.getTraitFactory()
 					.registerTrait(net.citizensnpcs.api.trait.TraitInfo.create(CargoTrait.class));
-		}
+	
+		// ************************
+		// * Ore Tracking *
+		// ************************
+		
+		tracking = new BreakTracking();
+		tracking.load();
+		trackingSave = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> tracking.save(), Config.trackSave, Config.trackSave);
+
+		trackingMapSave = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> tracking.saveMap(), Config.mapSave, Config.mapSave);
+		
+	}
 	
 	@Override
 	public void onDisable() {

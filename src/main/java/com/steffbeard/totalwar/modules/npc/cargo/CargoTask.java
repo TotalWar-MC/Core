@@ -3,7 +3,6 @@ package com.steffbeard.totalwar.modules.npc.cargo;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.steffbeard.totalwar.configs.NpcConfig;
 import com.steffbeard.totalwar.modules.npc.NPCMain;
 
 import net.countercraft.movecraft.craft.Craft;
@@ -13,7 +12,7 @@ import nl.thewgbbroz.dtltraders.guis.tradegui.items.TradableGUIItem;
 
 public abstract class CargoTask extends BukkitRunnable {
 
-	private NpcConfig config;
+	private CargoConfig config;
 
 	protected Craft craft;
 	protected final HashHitBox originalLocations;

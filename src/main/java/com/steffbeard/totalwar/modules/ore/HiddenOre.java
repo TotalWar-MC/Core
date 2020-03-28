@@ -16,7 +16,9 @@ import com.steffbeard.totalwar.modules.ore.listeners.ExploitListener;
 import com.steffbeard.totalwar.modules.ore.listeners.WorldGenerationListener;
 import com.steffbeard.totalwar.modules.ore.tracking.BreakTracking;
 
-public class HiddenOre extends JavaPlugin {
+import dev.siris.module.Module;
+
+public class HiddenOre extends Module {
 
 	private static HiddenOre plugin;
 

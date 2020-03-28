@@ -1,4 +1,4 @@
-package com.steffbeard.totalwar.configs;
+package com.steffbeard.totalwar.modules.npc.cargo;
 
 import java.io.File;
 import java.util.Arrays;
@@ -6,14 +6,13 @@ import java.util.Arrays;
 import com.steffbeard.totalwar.utils.ConfigManager;
 
 /**
- * @deprecated
  * 
  * has to be moved to ConfigNudes.java
  * 
  * @author Steffbeard
  *
  */
-public class NpcConfig extends ConfigManager {
+public class CargoConfig extends ConfigManager {
 	
 	@ConfigOptions(name = "scan.range")
 	public double scanRange;
@@ -28,7 +27,7 @@ public class NpcConfig extends ConfigManager {
 	@ConfigOptions(name = "debug.mode")
 	public boolean debugMode;
 
-	protected NpcConfig(final File dataFolder) {
+	protected CargoConfig(final File dataFolder) {
         super(new File(dataFolder, "config.yml"), Arrays.asList("Cargo NPC", "Configuration for Cargo NPC type."));
         this.scanRange = 100.0;
         this.transferDelay = 300;

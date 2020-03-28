@@ -13,7 +13,7 @@ import nl.thewgbbroz.dtltraders.guis.tradegui.items.TradableGUIItem;
 
 public class ProcessingTask extends BukkitRunnable implements Listener {
 	
-	public NpcConfig config;
+	public CargoConfig config;
 	
     private static final int DELAY_BETWEEN_DISPLAY = 1;
     private int remainingTime, remainingChests;

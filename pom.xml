@@ -56,6 +56,11 @@
 	
 	<dependencies>
 		<dependency>
+ 			<groupId>com.github.suneettipirneni</groupId>
+  			<artifactId>Modulizer</artifactId>
+ 			<version>LATEST</version>
+		</dependency>
+		<dependency>
    			<groupId>com.eclipsesource.minimal-json</groupId>
    			<artifactId>minimal-json</artifactId>
    			<version>0.9.4</version>

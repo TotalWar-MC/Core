@@ -6,14 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import com.steffbeard.totalwar.configs.NpcConfig;
+import com.steffbeard.totalwar.modules.npc.NPCMain;
 import com.steffbeard.totalwar.modules.npc.utils.CargoUtils;
 
 import java.util.List;
 
 public class LoadTask extends CargoTask {
 	
-	public NpcConfig config;
+	public CargoConfig config;
 	
     public LoadTask(Craft craft, TradableGUIItem item){
         super(craft,item);

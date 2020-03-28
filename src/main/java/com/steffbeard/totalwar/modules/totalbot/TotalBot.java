@@ -23,7 +23,7 @@ public class TotalBot {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 		jda = new JDABuilder(AccountType.BOT)
-				.setToken("NTk5MjY0OTgxOTM4MDc3NzA2.XnY9oA.FSDo2xfxymhnLVJ3QBjeA4vlaUE")
+				.setToken("NTk5MjY0OTgxOTM4MDc3NzA2.Xn9VWw.Lic3ePP0-MFud-TnNlnAOugy73I")
 				.setStatus(OnlineStatus.ONLINE)
 				.build();
 		

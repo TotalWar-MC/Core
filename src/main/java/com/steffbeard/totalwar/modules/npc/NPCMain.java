@@ -21,14 +21,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.steffbeard.totalwar.configs.NpcConfig;
 import com.steffbeard.totalwar.modules.crops.Main;
+import com.steffbeard.totalwar.modules.npc.cargo.CargoConfig;
 import com.steffbeard.totalwar.modules.npc.cargo.CargoTrait;
 import com.steffbeard.totalwar.modules.npc.cargo.LoadTask;
 import com.steffbeard.totalwar.modules.npc.cargo.ProcessingTask;
 import com.steffbeard.totalwar.modules.npc.cargo.UnloadTask;
 import com.steffbeard.totalwar.modules.npc.utils.CargoUtils;
 
+import dev.siris.module.Module;
 import net.citizensnpcs.api.npc.NPC;
 import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
@@ -41,7 +42,7 @@ import nl.thewgbbroz.dtltraders.guis.tradegui.TradeGUIPage;
 import nl.thewgbbroz.dtltraders.guis.tradegui.items.AGUIItem;
 import nl.thewgbbroz.dtltraders.guis.tradegui.items.TradableGUIItem;
 
-public class NPCMain extends JavaPlugin implements Listener {
+public class NPCMain extends Module implements Listener {
 
 	public static final String ERROR_TAG = ChatColor.RED + "Error: " + ChatColor.DARK_RED;
 	public static final String SUCCESS_TAG = ChatColor.DARK_AQUA + "Cargo: " + ChatColor.WHITE;
@@ -53,7 +54,7 @@ public class NPCMain extends JavaPlugin implements Listener {
 	private static int delay;// ticks
 	private static Material SIGN_POST = Material.getMaterial("SIGN_POST");
 	private static Main dtlTradersPlugin;
-	public NpcConfig config;
+	public CargoConfig config;
 	private CraftManager craftManager;
 	private boolean cardinalDistance;
 	private static boolean debug;
