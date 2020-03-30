@@ -1,22 +1,25 @@
 package com.steffbeard.totalwar.modules.masslist;
 
 import com.github.games647.craftapi.UUIDAdapter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import com.mysql.jdbc.Connection;
+
+import dev.siris.module.Module;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public final class MassWhitelist extends JavaPlugin {
-    FileConfiguration config = this.getConfig();
+public final class MassWhitelist extends Module {
+    
+	FileConfiguration config = this.getConfig();
     //Database Variables
     final String dbusername = config.getString("database_username"); //Database Username
     final String dbpassword = config.getString("database_password"); //Database Password
@@ -191,7 +194,7 @@ public final class MassWhitelist extends JavaPlugin {
         }
 
         if (command.getName().equals("masswl")) {
-//            TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
+        TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
             int wlarraylength = 0; //Initiate variable for array size.
             if (sender instanceof Player) {
                 Player player = (Player) sender;

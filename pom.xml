@@ -21,6 +21,52 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<filters>
+						<filter>
+							<artifact>inet.ipaddr:*</artifact>
+							<includes>
+								<include>**</include>
+							</includes>
+						</filter>
+						<filter>
+							<artifact>org.jsoup:*</artifact>
+							<includes>
+								<include>**</include>
+							</includes>
+						</filter>
+					</filters>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<outputDirectory>./apidocs</outputDirectory>
+					<notimestamp>true</notimestamp>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	
@@ -55,6 +101,11 @@
 	</repositories>
 	
 	<dependencies>
+		<dependency>
+			<groupId>com.github.seancfoley</groupId>
+			<artifactId>ipaddress</artifactId>
+			<version>2.0.1</version>
+		</dependency>
 		<dependency>
  			<groupId>com.github.suneettipirneni</groupId>
   			<artifactId>Modulizer</artifactId>
