@@ -114,9 +114,8 @@ public class ChainmailArmor {
         boots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
         NamespacedKey bkey = new NamespacedKey(plugin, "chainmail_boots");
         ShapedRecipe bootsrecipe = new ShapedRecipe(bkey, boots);
-        bootsrecipe.shape(new String[] { "###", 
-        							     "@#@", 
-        								 "@#@" });
+        bootsrecipe.shape(new String[] { "@#@", 
+        							     "@#@"});
         bootsrecipe.setIngredient('@', Material.IRON_NUGGET);
         bootsrecipe.setIngredient('#', Material.AIR);
         plugin.getServer().addRecipe(bootsrecipe);
