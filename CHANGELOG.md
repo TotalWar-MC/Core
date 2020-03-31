@@ -83,6 +83,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Brewery (Suggested by @ethansito)
     - [ ] Better gates
     - [ ] Drawbridges
+    - [x] Shearwire
+          - Shears sheep when they walk through tripwire
 - [ ] Custom Items
     - [ ] Spear
     = [ ] Pike

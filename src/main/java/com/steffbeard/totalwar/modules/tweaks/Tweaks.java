@@ -11,6 +11,7 @@ import org.bukkit.plugin.PluginManager;
 
 import com.steffbeard.totalwar.modules.tweaks.listeners.ArrowListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.RailsListener;
+import com.steffbeard.totalwar.modules.tweaks.listeners.ShearWireListener;
 
 import dev.siris.module.Module;
 
@@ -33,6 +34,7 @@ public class Tweaks extends Module {
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new RailsListener(), this);
         pm.registerEvents(new ArrowListener(), this);
+        pm.registerEvents(new ShearWireListener(), this);
         getLogger().info("> Tweaks loaded.");
     }
 
