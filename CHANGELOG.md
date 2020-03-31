@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [x] Armor/Barding
     - [x] Saddles
     - [x] Leads
+    - [x] Nametags
 - [ ] Tweaks
     - [x] Better Rails
     - [ ] Better Bows
