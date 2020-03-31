@@ -12,7 +12,13 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
-
+/**
+ * 
+ * Listener for Minecarts on a rail to see whether or not to speed them up
+ * 
+ * @author Steffbeard
+ *
+ */
 public class RailsListener implements Listener {
 
     private static final double BUKKIT_SPEED_MULTIPLIER = 0.4d;
