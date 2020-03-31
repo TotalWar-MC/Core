@@ -20,10 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [x] Saddles
     - [x] Leads
 - [ ] Tweaks
-    - [ ] Better Rails
+    - [x] Better Rails
     - [ ] Better Bows
           - Buff to normal bows to replace the need for Power
-    - [ ] Flame Arrows
+    - [x] Flame Arrows
           - Flame arrows now ignite things on fire
     - [ ] Anti-enchant
     - [ ] Food rott/storage
