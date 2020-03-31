@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Better block place
     - [ ] Better Day/Night
           - Days longer and nights shorter
+          - Maybe make seasons?
     - [ ] Multiblock library
     - [ ] Weight
           - Armor Weight + Inventory Weight
