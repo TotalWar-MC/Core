@@ -71,12 +71,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Custom fuel types?
 - [ ] Agriculture
     - [ ] Modify crop growth rate and drop chance based on region
+    - [ ] Add more foodstuffs
+          - Hops/Barley for booze
+          - More fruit types
+          - Maybe medicinal herbs?
+          - Drugs maybe?  
 - [ ] Machinery
     - [ ] Sawmill
     - [ ] Battering ram
     - [ ] Brewery (Suggested by @ethansito)
     - [ ] Better gates
     - [ ] Drawbridges
+- [ ] Custom Items
+    - [ ] Spear
+    = [ ] Pike
+    - [ ] Halbred
+    - [ ] Morning star
+    - [ ] Club/Spiked-club
+    - [ ] Different shield types
+          - Scutum
+          - Round shield
+          - Kite
+          - Heater
 
 ## v1.0.0 - yyyy-mm-dd
 ### Added
