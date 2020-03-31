@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.steffbeard.totalwar.modules.masslist.MassWhitelist;
+import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
 import dev.siris.module.ModuleManager;
 
@@ -13,7 +14,7 @@ import dev.siris.module.ModuleManager;
  * 
  * Main plugin for TW:R
  * 
- * @version 2.0.0
+ * @version 1.0.0
  * @author Steffbeard, Konsyr, LeoDog, ProgrammerDan
  */
 
@@ -23,7 +24,6 @@ public class Core extends JavaPlugin {
 	public static Core plugin;
 	public static Logger LOG = null;
 	public static Level minLogLevel = Level.INFO;
-	private String version = "2.0.0";
 	private static ModuleManager moduleManager;
 	
 	/**
@@ -37,13 +37,13 @@ public class Core extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		System.out.println("====================      TW-CORE      ========================");
-		version = this.getDescription().getVersion();
 		
 		// Create a module manager instance.
 		moduleManager = new ModuleManager(this);
 		
 		// Tell the manager to load the class.
 		moduleManager.loadModuleFromClass("MassWhitelist", MassWhitelist.class);
+		moduleManager.loadModuleFromClass("Tweaks", Tweaks.class);
 		
 		// Enables the modules
 		moduleManager.enableModules();
