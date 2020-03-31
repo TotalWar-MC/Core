@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.steffbeard.totalwar.modules.crops.CropsMain;
 import com.steffbeard.totalwar.modules.masslist.MassWhitelist;
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
@@ -44,6 +45,7 @@ public class Core extends JavaPlugin {
 		// Tell the manager to load the class.
 		moduleManager.loadModuleFromClass("MassWhitelist", MassWhitelist.class);
 		moduleManager.loadModuleFromClass("Tweaks", Tweaks.class);
+		moduleManager.loadModuleFromClass("Crops", CropsMain.class);
 		
 		// Enables the modules
 		moduleManager.enableModules();
