@@ -13,7 +13,7 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
 
-public class MinecartListener implements Listener {
+public class RailsListener implements Listener {
 
     private static final double BUKKIT_SPEED_MULTIPLIER = 0.4d;
 
