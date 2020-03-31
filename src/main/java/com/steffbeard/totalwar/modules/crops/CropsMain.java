@@ -27,6 +27,17 @@ import com.steffbeard.totalwar.modules.crops.utils.MaterialAliases;
 
 import dev.siris.module.Module;
 
+/**
+ * 
+ * So far this handles crop growth rate based on biome.
+ * 
+ * @TODO
+ * Need to make crop growth rate also based on region
+ * Need to augment crop drop rates based on region/biome
+ * 
+ * @author Steffbeard
+ *
+ */
 public class CropsMain extends Module {
 
 	public static CropsMain plugin;
