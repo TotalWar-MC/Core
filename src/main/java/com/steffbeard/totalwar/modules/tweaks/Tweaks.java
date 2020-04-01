@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 import com.steffbeard.totalwar.modules.tweaks.handlers.BreedTask;
@@ -30,12 +31,17 @@ import dev.siris.module.Module;
  */
 public class Tweaks extends Module {
 	
+	private static Tweaks instance;
+	
+	// Stuff for flame arrows
     public static List<String> worlds;
     public static boolean playerOnlyArrows;
-	private static double speed_multiplier;
 	
+    // Stuff for rails
+    private static double speed_multiplier;
+	
+	// Stuff for animal breeding
 	private Animal wildAnimalHandler;
-
     private int breedTask;
     private long startTime;
     private int interval;
@@ -46,10 +52,19 @@ public class Tweaks extends Module {
     private int maxMateDistance;
     public Set<Entity> lastMateAnimals;
 
+    /**
+     * 
+     * Set the instance
+     * 
+     */
+    @Override
+    public void onLoad() {
+    	instance = this;
+    }
+    
 	@SuppressWarnings("deprecation")
 	@Override
     public void onEnable() {
-        this.updateConfig();
         this.interval = this.getConfig().getInt("interval") * 20 * 60;
         this.mateMode = this.getConfig().getBoolean("mateMode");
         this.chance = this.getConfig().getDouble("chance");
@@ -58,12 +73,10 @@ public class Tweaks extends Module {
         this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
         this.lastMateAnimals = new HashSet<Entity>();
         speed_multiplier = this.getConfig().getDouble("speedMultiplier");
-        PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new RailsListener(), this);
-        pm.registerEvents(new ArrowListener(), this);
-        pm.registerEvents(new ShearWireListener(), this);
-        pm.registerEvents(new BreedTaskListener(), this);
-        pm.registerEvents(new AnimalDropsListener(), this);
+        
+        this.updateConfig();
+        this.loadListeners();
+        
         getLogger().info("> Tweaks loaded.");
 
         this.breedTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new BreedTask(this), 0L, this.interval);
@@ -125,6 +138,15 @@ public class Tweaks extends Module {
         	}
     }
     
+    public void loadListeners() {
+    	PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvents(new RailsListener(), this);
+        pm.registerEvents(new ArrowListener(), this);
+        pm.registerEvents(new ShearWireListener(), this);
+        pm.registerEvents(new BreedTaskListener(), this);
+        pm.registerEvents(new AnimalDropsListener(), this);
+    }
+    
     /**
      * 
      * Get speed multiplier for rails
@@ -161,35 +183,92 @@ public class Tweaks extends Module {
         return Tweaks.worlds.size() == 0 || Tweaks.worlds.contains(world.getName().toLowerCase());
     }
     
+    /**
+     * 
+     * Clears the animals that just mated
+     * 
+     */
     public void clearMatedAnimals() {
         this.lastMateAnimals.clear();
     }
 
+    /**
+     * 
+     * Added an entity that just mated to a list
+     * 
+     * @param e
+     */
     public void addMatedAnimal(Entity e) {
         this.lastMateAnimals.add(e);
     }
 
+    /**
+     * 
+     * Get the handler for mating
+     * 
+     * @return
+     */
     public Animal getWildAnimalHandler() {
         return wildAnimalHandler;
     }
 
+    /**
+     * 
+     * Get the mate mode
+     * 
+     * @return
+     */
     public boolean getMateMode() {
         return mateMode;
     }
 
+    /**
+     * 
+     * Get the chance of mating
+     * 
+     * @return
+     */
     public double getChance() {
         return chance;
     }
 
+    /**
+     * 
+     * Get the maximum allowed animals per block
+     * 
+     * @return
+     */
     public double getMaxAnimalsPerBlock() {
         return maxAnimalsPerBlock;
     }
 
+    /**
+     * 
+     * Get maximum allowed animals in the radius
+     * 
+     * @return
+     */
     public double getMaxAnimalsCheckRadius() {
         return maxAnimalsCheckRadius;
     }
 
+    /**
+     * 
+     * Get the maximum distance that animals can mate from
+     * 
+     * @return
+     */
     public int getMaxMateDistance() {
         return maxMateDistance;
+    }
+    
+    /**
+     * 
+     * Instance
+     * 
+     * @return instance
+     */
+    public static Tweaks getInstance() {
+    	return instance;
     }
 }
