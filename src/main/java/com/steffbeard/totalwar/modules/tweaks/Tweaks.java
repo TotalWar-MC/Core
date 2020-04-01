@@ -14,6 +14,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginManager;
 
 import com.steffbeard.totalwar.modules.tweaks.handlers.BreedTask;
+import com.steffbeard.totalwar.modules.tweaks.listeners.AnimalDropsListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.ArrowListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.BreedTaskListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.RailsListener;
@@ -42,9 +43,7 @@ public class Tweaks extends Module {
     private double chance;
     private double maxAnimalsPerBlock;
     private double maxAnimalsCheckRadius;
-    private boolean removeXP;
     private int maxMateDistance;
-    private BreedTaskListener listener;
     public Set<Entity> lastMateAnimals;
 
 	@SuppressWarnings("deprecation")
@@ -56,7 +55,6 @@ public class Tweaks extends Module {
         this.chance = this.getConfig().getDouble("chance");
         this.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
         this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
-        this.removeXP = this.getConfig().getBoolean("removeXP");
         this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
         this.lastMateAnimals = new HashSet<Entity>();
         speed_multiplier = this.getConfig().getDouble("speedMultiplier");
@@ -64,12 +62,9 @@ public class Tweaks extends Module {
         pm.registerEvents(new RailsListener(), this);
         pm.registerEvents(new ArrowListener(), this);
         pm.registerEvents(new ShearWireListener(), this);
+        pm.registerEvents(new BreedTaskListener(), this);
+        pm.registerEvents(new AnimalDropsListener(), this);
         getLogger().info("> Tweaks loaded.");
-        
-        if (this.removeXP) {
-            this.listener = new BreedTaskListener(this);
-            getServer().getPluginManager().registerEvents(this.listener, this);
-        }
 
         this.breedTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new BreedTask(this), 0L, this.interval);
         this.startTime = System.currentTimeMillis();
