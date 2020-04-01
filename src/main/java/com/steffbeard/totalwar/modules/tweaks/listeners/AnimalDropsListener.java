@@ -62,7 +62,7 @@ public class AnimalDropsListener implements Listener {
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
 			SkullMeta meta = (SkullMeta) skull.getItemMeta();
 			meta.setOwner(e.getName());
-			meta.setDisplayName(ChatColor.YELLOW + e.getName() + "'s Skull");
+			meta.setDisplayName(ChatColor.YELLOW + e.getName() + "'s Head");
 			skull.setItemMeta(meta);
 			
 			e.getLocation().getWorld().dropItem(e.getLocation(), new ItemStack(Material.BONE));
