@@ -1,0 +1,19 @@
+name: Whitelist
+version: 1.0.0
+main: com.steffbeard.totalwar.modules.masslist.MassWhitelist
+prefix: Whitelist
+authors: [konsyr11, TotalWar]
+description: Total War's whitelisting plugin for mass-whitelisting players.
+commands:
+  readwl:
+    description: Read the database for accepted players and give the number of players to be whitelisted.
+  masswl:
+    description: Automatically whitelist all players accepted in the database, and set their status to "Done".
+permissions:
+  masswhitelist.readwl:
+    description: Access to the /readwl command, which reads the database for new accepted players.
+    default: op
+  masswhitelist.masswl:
+    description: Access to the /masswl command, which whitelists accepted players from the database.
+    default: op
+
