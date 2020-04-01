@@ -32,7 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
           - Adds salt, sugar, and snow (ice) as methods of preserving food
     - [ ] Better animal drops
           - Killing animals drops bones + chance of spider-eyes
+          - Also now animals don't drop XP because XP is useless so lets stop more entities from spawning
     - [x] Better animal spawning
+          - Also stops XP from spawning from breeding because XP is uselss so lets stop more entities from spawning
     - [ ] Better block place
     - [ ] Better Day/Night
           - Days longer and nights shorter
