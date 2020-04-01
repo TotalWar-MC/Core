@@ -98,6 +98,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Drawbridges
     - [x] Shearwire
           - Shears sheep when they walk through tripwire
+- [ ] WorldBorder-Movecraft Hook
+     - [ ] Warn players in ships when they are nearing the WorldBorder
+     - [ ] Stop their ships
+     - [ ] Add teleportation for circumnavigation
 - [ ] Theology
     - [ ] Allow for custom religions
     - [ ] Allow players to join custom religions

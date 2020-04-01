@@ -9,6 +9,7 @@ import com.steffbeard.totalwar.modules.crops.CropsMain;
 import com.steffbeard.totalwar.modules.masslist.MassWhitelist;
 import com.steffbeard.totalwar.modules.npc.NpcMain;
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
+import com.steffbeard.totalwar.modules.worldborder.MWBMain;
 
 import dev.siris.module.ModuleManager;
 
@@ -48,6 +49,7 @@ public class Core extends JavaPlugin {
 		moduleManager.loadModuleFromClass("Tweaks", Tweaks.class);
 		moduleManager.loadModuleFromClass("Crops", CropsMain.class);
 		moduleManager.loadModuleFromClass("NPCs", NpcMain.class);
+		moduleManager.loadModuleFromClass("Movecraft-WorldBorder", MWBMain.class);
 		
 		// Enables the modules
 		moduleManager.enableModules();

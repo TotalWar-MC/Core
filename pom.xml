@@ -281,5 +281,13 @@
     		<artifactId>ebean</artifactId>
     		<version>2.7.3</version>
 		</dependency>
+		<!-- World Border -->
+		<dependency>
+            <groupId>com.wimbli</groupId>
+            <artifactId>WorldBorder</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/WorldBorder.jar</systemPath>
+        </dependency>
 	</dependencies>
 </project>
