@@ -7,9 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.steffbeard.totalwar.modules.crops.CropsMain;
 import com.steffbeard.totalwar.modules.masslist.MassWhitelist;
+import com.steffbeard.totalwar.modules.movecraft.MWBMain;
 import com.steffbeard.totalwar.modules.npc.NpcMain;
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
-import com.steffbeard.totalwar.modules.worldborder.MWBMain;
 
 import dev.siris.module.ModuleManager;
 

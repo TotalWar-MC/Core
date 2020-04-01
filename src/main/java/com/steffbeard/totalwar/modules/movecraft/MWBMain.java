@@ -1,4 +1,4 @@
-package com.steffbeard.totalwar.modules.worldborder;
+package com.steffbeard.totalwar.modules.movecraft;
 
 import com.wimbli.WorldBorder.BorderData;
 import com.wimbli.WorldBorder.Config;

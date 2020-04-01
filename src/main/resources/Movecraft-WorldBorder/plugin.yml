@@ -1,5 +1,5 @@
 name: Movecraft-WorldBorder
-main: com.steffbeard.totalwar.modules.worldborder.MWBMain
+main: com.steffbeard.totalwar.modules.movecraft.MWBMain
 version: 1.0.0
 authors: [eirikh1996, Steffbeard]
 depend: [Movecraft, WorldBorder]
