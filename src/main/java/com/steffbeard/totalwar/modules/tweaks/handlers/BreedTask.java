@@ -12,6 +12,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
+/**
+ * 
+ * Handles the actual breeding of animals.
+ * 
+ * @author Steffbeard
+ *
+ */
 public class BreedTask extends BukkitRunnable {
     private final Tweaks plugin;
     private final Random random;
@@ -21,6 +28,11 @@ public class BreedTask extends BukkitRunnable {
         this.random = new Random();
     }
 
+    /**
+     * 
+     * Continous checks to see if there are animals that can do the do
+     * 
+     */
     public void run() {
         plugin.clearMatedAnimals();
 
@@ -71,6 +83,13 @@ public class BreedTask extends BukkitRunnable {
         }
     }
 
+    /**
+     * 
+     * What are the chances of an animal being able to have kids?
+     * 
+     * @param animal
+     * @return probability
+     */
     public double getReproductionProbability(Animals animal) {
         double scale = plugin.getMaxAnimalsCheckRadius() / 2.0;
         List<Entity> neighbors = animal.getNearbyEntities(scale, scale, scale);

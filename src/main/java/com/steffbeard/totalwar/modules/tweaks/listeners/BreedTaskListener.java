@@ -10,6 +10,15 @@ import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
 import java.util.Set;
 
+/**
+ * 
+ * Listener to know if two animals did the deed or not.
+ * Also gets rid of the XP dropped so we don't lag the server by spawning more entities then we already are.
+ * Plus players don't need XP anyways.
+ * 
+ * @author Steffbeard
+ *
+ */
 public class BreedTaskListener implements Listener {
     private Tweaks plugin;
 
