@@ -20,11 +20,8 @@ import java.util.Set;
  *
  */
 public class BreedTaskListener implements Listener {
-    private Tweaks plugin;
-
-    public BreedTaskListener(Tweaks plugin) {
-        this.plugin = plugin;
-    }
+    
+	private Tweaks plugin;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityBreedEvent(EntityBreedEvent e) {
