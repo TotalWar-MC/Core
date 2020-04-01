@@ -177,16 +177,16 @@ public final class MassWhitelist extends Module {
                 Player player = (Player) sender;
                 if (player.hasPermission("masswhitelist.readwl")) {
                     try {
-                        player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "MassWhitelist" + ChatColor.RED + "]" + ChatColor.GREEN + " There are currently " + ChatColor.YELLOW + rs.getInt("count(*)") + ChatColor.GREEN + " accepted players to be whitelisted. Run /masswl to whitelist them!");
+                        player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "Whitelist" + ChatColor.RED + "]" + ChatColor.GREEN + " There are currently " + ChatColor.YELLOW + rs.getInt("count(*)") + ChatColor.GREEN + " accepted players to be whitelisted. Run /masswl to whitelist them!");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "MassWhitelist" + ChatColor.RED + "] " + ChatColor.DARK_RED + "You don't have the permission to run this command!");
+                    player.sendMessage(ChatColor.RED + "[" + ChatColor.YELLOW + "Whitelist" + ChatColor.RED + "] " + ChatColor.DARK_RED + "You don't have the permission to run this command!");
                 }
             } else {
                 try {
-                    System.out.println("[MassWhitelist] There are currently " + rs.getInt("count(*)") + " accepted players to be whitelisted. Run /masswl to whitelist them!");
+                    System.out.println("[Whitelist] There are currently " + rs.getInt("count(*)") + " accepted players to be whitelisted. Run /masswl to whitelist them!");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -194,7 +194,7 @@ public final class MassWhitelist extends Module {
         }
 
         if (command.getName().equals("masswl")) {
-        TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
+//     	 	TemmieWebhook playerNotify = new TemmieWebhook(discordPlayers);
             int wlarraylength = 0; //Initiate variable for array size.
             if (sender instanceof Player) {
                 Player player = (Player) sender;

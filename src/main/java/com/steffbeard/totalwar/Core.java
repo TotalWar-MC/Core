@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.steffbeard.totalwar.modules.crops.CropsMain;
 import com.steffbeard.totalwar.modules.masslist.MassWhitelist;
+import com.steffbeard.totalwar.modules.npc.NpcMain;
 import com.steffbeard.totalwar.modules.tweaks.Tweaks;
 
 import dev.siris.module.ModuleManager;
@@ -23,7 +24,7 @@ public class Core extends JavaPlugin {
 
 	// Main
 	public static Core plugin;
-	public static Logger LOG = null;
+	public static Logger logger = Logger.getLogger("Core");
 	public static Level minLogLevel = Level.INFO;
 	private static ModuleManager moduleManager;
 	
@@ -46,6 +47,7 @@ public class Core extends JavaPlugin {
 		moduleManager.loadModuleFromClass("MassWhitelist", MassWhitelist.class);
 		moduleManager.loadModuleFromClass("Tweaks", Tweaks.class);
 		moduleManager.loadModuleFromClass("Crops", CropsMain.class);
+		moduleManager.loadModuleFromClass("NPCs", NpcMain.class);
 		
 		// Enables the modules
 		moduleManager.enableModules();
@@ -74,5 +76,31 @@ public class Core extends JavaPlugin {
 	 * 
 	 * @return ModuleManager
 	 */
-	public static ModuleManager getModuleManager() { return moduleManager; }
+	public static ModuleManager getModuleManager() { 
+		return moduleManager; 
+	}
+	
+	/**********************************
+	 *                                *
+	 * This is all just logging stuff *
+	 *                                *
+	 **********************************/
+	
+	public static void severe(String message) {
+	    logger.severe("[Core] " + message);
+	}
+
+	public static void warning(String message) {
+	    logger.warning("[Core] " + message);
+	}
+
+	public static void info(String message) {
+	    logger.info("[Core] " + message);
+	}
+
+//	public static void debug(String message) {
+//	    if (config.getDebug()) {
+//	      logger.info("[Core] " + message);
+//	    }   
+//	}
 }
