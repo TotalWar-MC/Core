@@ -1,15 +1,21 @@
 package com.steffbeard.totalwar.modules.tweaks;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginManager;
 
+import com.steffbeard.totalwar.modules.tweaks.handlers.BreedTask;
 import com.steffbeard.totalwar.modules.tweaks.listeners.ArrowListener;
+import com.steffbeard.totalwar.modules.tweaks.listeners.BreedTaskListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.RailsListener;
 import com.steffbeard.totalwar.modules.tweaks.listeners.ShearWireListener;
 
@@ -26,21 +32,54 @@ public class Tweaks extends Module {
     public static List<String> worlds;
     public static boolean playerOnlyArrows;
 	private static double speed_multiplier;
+	
+	private Animal wildAnimalHandler;
 
+    private int breedTask;
+    private long startTime;
+    private int interval;
+    private boolean mateMode;
+    private double chance;
+    private double maxAnimalsPerBlock;
+    private double maxAnimalsCheckRadius;
+    private boolean removeXP;
+    private int maxMateDistance;
+    private BreedTaskListener listener;
+    public Set<Entity> lastMateAnimals;
+
+	@SuppressWarnings("deprecation")
 	@Override
     public void onEnable() {
         this.updateConfig();
-        speed_multiplier = getConfig().getDouble("speedMultiplier");
+        this.interval = this.getConfig().getInt("interval") * 20 * 60;
+        this.mateMode = this.getConfig().getBoolean("mateMode");
+        this.chance = this.getConfig().getDouble("chance");
+        this.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
+        this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
+        this.removeXP = this.getConfig().getBoolean("removeXP");
+        this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
+        this.lastMateAnimals = new HashSet<Entity>();
+        speed_multiplier = this.getConfig().getDouble("speedMultiplier");
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new RailsListener(), this);
         pm.registerEvents(new ArrowListener(), this);
         pm.registerEvents(new ShearWireListener(), this);
         getLogger().info("> Tweaks loaded.");
+        
+        if (this.removeXP) {
+            this.listener = new BreedTaskListener(this);
+            getServer().getPluginManager().registerEvents(this.listener, this);
+        }
+
+        this.breedTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new BreedTask(this), 0L, this.interval);
+        this.startTime = System.currentTimeMillis();
     }
 
 	@Override
     public void onDisable() {
        getLogger().info("> Tweaks unloaded");
+       this.getServer().getScheduler().cancelTask(this.breedTask);
+       HandlerList.unregisterAll(this);
     }
 
 	/**
@@ -125,5 +164,37 @@ public class Tweaks extends Module {
      */
     public static boolean canUseInWorld(final World world) {
         return Tweaks.worlds.size() == 0 || Tweaks.worlds.contains(world.getName().toLowerCase());
+    }
+    
+    public void clearMatedAnimals() {
+        this.lastMateAnimals.clear();
+    }
+
+    public void addMatedAnimal(Entity e) {
+        this.lastMateAnimals.add(e);
+    }
+
+    public Animal getWildAnimalHandler() {
+        return wildAnimalHandler;
+    }
+
+    public boolean getMateMode() {
+        return mateMode;
+    }
+
+    public double getChance() {
+        return chance;
+    }
+
+    public double getMaxAnimalsPerBlock() {
+        return maxAnimalsPerBlock;
+    }
+
+    public double getMaxAnimalsCheckRadius() {
+        return maxAnimalsCheckRadius;
+    }
+
+    public int getMaxMateDistance() {
+        return maxMateDistance;
     }
 }

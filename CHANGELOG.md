@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
           - Adds salt, sugar, and snow (ice) as methods of preserving food
     - [ ] Better animal drops
           - Killing animals drops bones + chance of spider-eyes
-    - [ ] Better animal spawning
+    - [x] Better animal spawning
     - [ ] Better block place
     - [ ] Better Day/Night
           - Days longer and nights shorter
@@ -85,6 +85,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Drawbridges
     - [x] Shearwire
           - Shears sheep when they walk through tripwire
+- [ ] Theology
+    - [ ] Allow for custom religions
+    - [ ] Allow players to join custom religions
+    - [ ] Provide API for Nations to allow for bonuses
+    - [ ] Make pre-made base religions such as Islam, Christianity, Judaism
+    - [ ] Sect system to allow for subclassing?
+           - For example do we allow Sunni, Shia and Baathism to be sub sects of Islam but still be counted as Muslim or seperate religions entirely?
 - [ ] Custom Items
     - [ ] Spear
     = [ ] Pike
