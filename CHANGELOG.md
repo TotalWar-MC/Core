@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Better animal drops
           - Killing animals drops bones + chance of spider-eyes
           - Also now animals don't drop XP because XP is useless so lets stop more entities from spawning
+          - Players drop their skull and bones when they die. Also drops raw pork because of the meme.
     - [x] Better animal spawning
           - Also stops XP from spawning from breeding because XP is uselss so lets stop more entities from spawning
     - [ ] Better block place

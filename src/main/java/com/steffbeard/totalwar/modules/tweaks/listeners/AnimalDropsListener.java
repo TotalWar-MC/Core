@@ -66,6 +66,7 @@ public class AnimalDropsListener implements Listener {
 			skull.setItemMeta(meta);
 			
 			e.getLocation().getWorld().dropItem(e.getLocation(), new ItemStack(Material.BONE));
+			e.getLocation().getWorld().dropItem(e.getLocation(), new ItemStack(Material.PORK));
 			e.getLocation().getWorld().dropItem(e.getLocation(), skull);
 		}
 	}
