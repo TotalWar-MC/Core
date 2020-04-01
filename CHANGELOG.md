@@ -56,18 +56,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - [ ] Discord chat filter
     - [ ] Server chat filter
 - [ ] NPCs
-    - [ ] Cargo Type
+    - [x] Cargo Type
+          - Be able to automatically buy and sell cargo from NPCs on Movecraft ships.
     - [ ] Builder Type
+          - Automatically build and repair things as long as players have the materials.
     - [ ] Miner Type
+          - Automatically mines for players.
     - [ ] Farmer Type
+          - Automatically farms for players.
     - [ ] Rancher Type
+          - Herds and breeds animals.
     - [ ] Lumberjack Type
+          - Collects wood and clears forests.
     - [ ] Postal Type
+          - Delivers packages and mail.
     - [ ] Merchant/Shopkeep Type
+          - Player-owned NPC shop with configurable stock and price inflation
     - [ ] Stablehand Type
+          - Manages player owned steads and "trainable" horses and pets
     - [ ] Better pathing
           - Automated day/night pathing for civilian types
     - [ ] Better animations
+          - Smoother sleep, swing, and attack animations for NPCs to make them more player-like
 - [ ] Ores
     - [x] HiddenOres backporting
     - [ ] Region specific ore-gen
