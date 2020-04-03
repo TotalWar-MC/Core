@@ -1,6 +1,6 @@
 name: Core
 version: 1.0.0
 main: com.steffbeard.totalwar.Core
-author: [Steffbeard]
+authors: [Steffbeard]
 description: Core plugin. Built specifically for TW:R
 
