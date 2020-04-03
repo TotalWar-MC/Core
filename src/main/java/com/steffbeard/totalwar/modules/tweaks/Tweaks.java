@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -32,6 +33,7 @@ import dev.siris.module.Module;
 public class Tweaks extends Module {
 	
 	private static Tweaks instance;
+	public static FileConfiguration config;
 	
 	// Stuff for flame arrows
     public static List<String> worlds;
@@ -44,12 +46,12 @@ public class Tweaks extends Module {
 	private Animal wildAnimalHandler;
     private int breedTask;
     private long startTime;
-    private int interval;
-    private boolean mateMode;
-    private double chance;
-    private double maxAnimalsPerBlock;
-    private double maxAnimalsCheckRadius;
-    private int maxMateDistance;
+    private static int interval;
+    private static boolean mateMode;
+    private static double chance;
+    private static double maxAnimalsPerBlock;
+    private static double maxAnimalsCheckRadius;
+    private static int maxMateDistance;
     public Set<Entity> lastMateAnimals;
 
     /**
@@ -65,21 +67,14 @@ public class Tweaks extends Module {
 	@SuppressWarnings("deprecation")
 	@Override
     public void onEnable() {
-        this.interval = this.getConfig().getInt("interval") * 20 * 60;
-        this.mateMode = this.getConfig().getBoolean("mateMode");
-        this.chance = this.getConfig().getDouble("chance");
-        this.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
-        this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
-        this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
         this.lastMateAnimals = new HashSet<Entity>();
-        speed_multiplier = this.getConfig().getDouble("speedMultiplier");
         
         this.updateConfig();
         this.loadListeners();
         
         getLogger().info("> Tweaks loaded.");
 
-        this.breedTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new BreedTask(this), 0L, this.interval);
+        this.breedTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new BreedTask(this), 0L, Tweaks.interval);
         this.startTime = System.currentTimeMillis();
     }
 
@@ -163,13 +158,20 @@ public class Tweaks extends Module {
      * 
      */
     public void updateConfig() {
-        this.saveDefaultConfig();
-        this.reloadConfig();
+    	Tweaks.interval = this.getConfig().getInt("interval") * 20 * 60;
+        Tweaks.mateMode = this.getConfig().getBoolean("mateMode");
+        Tweaks.chance = this.getConfig().getDouble("chance");
+        Tweaks.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
+        Tweaks.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
+        Tweaks.maxMateDistance = this.getConfig().getInt("maxMateDistance");
+        Tweaks.speed_multiplier = this.getConfig().getDouble("speedMultiplier");
         Tweaks.worlds = (List<String>)this.getConfig().getStringList("worlds");
         Tweaks.playerOnlyArrows = this.getConfig().getBoolean("playerOnlyArrows");
         for (int i = 0; i < Tweaks.worlds.size(); ++i) {
             Tweaks.worlds.set(i, Tweaks.worlds.get(i).toLowerCase());
         }
+    	this.saveDefaultConfig();
+        this.reloadConfig();
     }
     
     /**
