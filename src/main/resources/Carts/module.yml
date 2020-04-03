@@ -1,0 +1,5 @@
+name: Crops
+main: com.steffbeard.totalwar.modules.carts.Cart
+version: 1.0.0
+authors: [TheTimelord, Steffbeard]
+description: Adds horse carts and wagons.

@@ -3,6 +3,7 @@ package com.steffbeard.totalwar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.steffbeard.totalwar.modules.carts.Cart;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.steffbeard.totalwar.modules.crops.CropsMain;
@@ -50,6 +51,7 @@ public class Core extends JavaPlugin {
 		moduleManager.loadModuleFromClass("Crops", CropsMain.class);
 		moduleManager.loadModuleFromClass("NPCs", NpcMain.class);
 		moduleManager.loadModuleFromClass("Movecraft-WorldBorder", MWBMain.class);
+		moduleManager.loadModuleFromClass("Carts", Cart.class);
 		
 		// Enables the modules
 		moduleManager.enableModules();
