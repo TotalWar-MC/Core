@@ -1,0 +1,5 @@
+name: Crops
+main: com.steffbeard.totalwar.modules.crops.CropsMain
+version: 1.0.0
+authors: [mgrandi, gispy-king, jacobcole2000, WildWeazel, ProgrammerDan, Numrufus, Erocs, danquist, pruby, Maxopoly, BlackXnt, Steffbeard]
+description: Makes farming harder by limiting growth rates of crops and making them only grow well in certain biomes.
