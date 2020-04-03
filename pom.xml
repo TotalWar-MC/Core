@@ -1,75 +1,87 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.steffbeard.totalwar</groupId>
-  <artifactId>totalwar-core</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  	<build>
-  		<defaultGoal>clean package</defaultGoal>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-				<filters>
-					<filter>
-						<artifact>com.zaxxer:HikariCP</artifact>
-						<includes>
-							<include>**</include>
-						</includes>
-					</filter>
-				</filters>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
-				<configuration>
-					<filters>
-						<filter>
-							<artifact>inet.ipaddr:*</artifact>
-							<includes>
-								<include>**</include>
-							</includes>
-						</filter>
-						<filter>
-							<artifact>org.jsoup:*</artifact>
-							<includes>
-								<include>**</include>
-							</includes>
-						</filter>
-					</filters>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
-				<configuration>
-					<outputDirectory>./apidocs</outputDirectory>
-					<notimestamp>true</notimestamp>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-		<resources>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.steffbeard.totalwar</groupId>
+    <artifactId>Core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Core</name>
+
+    <description>Core plugin. Built specifically for TW:R</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>com.zaxxer:HikariCP</artifact>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </filter>
+                    </filters>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>inet.ipaddr:*</artifact>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </filter>
+                        <filter>
+                            <artifact>org.jsoup:*</artifact>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <outputDirectory>./apidocs</outputDirectory>
+                    <notimestamp>true</notimestamp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
@@ -79,17 +91,17 @@
                 </includes>
             </resource>
         </resources>
-	</build>
-	
-	<repositories>
-		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
-         <repository>
-			<id>citizens-repo</id>
-			<url>http://repo.citizensnpcs.co/</url>
-		</repository>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>citizens-repo</id>
+            <url>http://repo.citizensnpcs.co/</url>
+        </repository>
         <repository>
             <id>vault-repo</id>
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
@@ -109,54 +121,54 @@
             <name>JCenter</name>
             <url>https://jcenter.bintray.com</url>
         </repository>
-	</repositories>
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.github.seancfoley</groupId>
-			<artifactId>ipaddress</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
- 			<groupId>com.github.suneettipirneni</groupId>
-  			<artifactId>Modulizer</artifactId>
- 			<version>LATEST</version>
-		</dependency>
-		<dependency>
-   			<groupId>com.eclipsesource.minimal-json</groupId>
-   			<artifactId>minimal-json</artifactId>
-   			<version>0.9.4</version>
-		</dependency>
-		<!--Spigot API -->
-	<dependency>
-		<groupId>org.spigotmc</groupId>
-		<artifactId>spigot-api</artifactId>
-		<version>1.12.2-R0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-	</dependency>
-	<!--Spigot Jar -->
-	<dependency>
-		<groupId>org.spigotmc</groupId>
-		<artifactId>spigot</artifactId>
-		<version>1.12.2</version>
-		<scope>system</scope>
-		<systemPath>${project.basedir}/libs/spigot-1.12.2.jar</systemPath>
-	</dependency>
-	<!--Bukkit API -->
-	<dependency>
-		<groupId>org.bukkit</groupId>
-		<artifactId>bukkit</artifactId>
-		<version>1.12.2-R0.1-SNAPSHOT</version>
-		<scope>provided</scope>
-		</dependency>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.seancfoley</groupId>
+            <artifactId>ipaddress</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.suneettipirneni</groupId>
+            <artifactId>Modulizer</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eclipsesource.minimal-json</groupId>
+            <artifactId>minimal-json</artifactId>
+            <version>0.9.4</version>
+        </dependency>
+        <!--Spigot API -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Spigot Jar -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.12.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot-1.12.2.jar</systemPath>
+        </dependency>
+        <!--Bukkit API -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <!--Movecraft-->
         <dependency>
-			<groupId>net.countercraft.movecraft</groupId>
-			<artifactId>Movecraft</artifactId>
-			<version>3.0</version>
+            <groupId>net.countercraft.movecraft</groupId>
+            <artifactId>Movecraft</artifactId>
+            <version>3.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/Movecraft.jar</systemPath>
-		</dependency>
+        </dependency>
         <!--DTL Core-->
         <!--<dependency>
 			<groupId>net.dandielo</groupId>
@@ -167,19 +179,19 @@
 		</dependency>-->
         <!--DTL Traders-->
         <dependency>
-			<groupId>nl.thewgbbroz</groupId>
-			<artifactId>dtlTraders</artifactId>
-			<version>LATEST</version>
+            <groupId>nl.thewgbbroz</groupId>
+            <artifactId>dtlTraders</artifactId>
+            <version>LATEST</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/dtlTraders.jar</systemPath>
-		</dependency>
+        </dependency>
         <!--Citizens-->
         <dependency>
             <groupId>net.citizensnpcs</groupId>
-			<artifactId>citizensapi</artifactId>
-			<version>2.0.24-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
+            <artifactId>citizensapi</artifactId>
+            <version>2.0.24-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <!--Vault-->
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
@@ -198,12 +210,12 @@
             <version>0.2</version>
         </dependency>
         <!--Bukkit API -->
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.12.2-R0.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -287,18 +299,18 @@
             <version>1.8.3</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.avaje/ebean -->
-		<dependency>
-    		<groupId>org.avaje</groupId>
-    		<artifactId>ebean</artifactId>
-    		<version>2.7.3</version>
-		</dependency>
-		<!-- World Border -->
-		<dependency>
+        <dependency>
+            <groupId>org.avaje</groupId>
+            <artifactId>ebean</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <!-- World Border -->
+        <dependency>
             <groupId>com.wimbli</groupId>
             <artifactId>WorldBorder</artifactId>
             <version>LATEST</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/WorldBorder.jar</systemPath>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>

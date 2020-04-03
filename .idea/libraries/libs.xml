@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/WorldBorder.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spigot-1.12.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/dtlTraders.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/Movecraft.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
